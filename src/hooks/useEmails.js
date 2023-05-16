@@ -1,10 +1,11 @@
-import usePost from "./usePostData";
+import usePostData from "./usePostData";
 import useStore from "./useStore";
-const useEmails = ({ pageNum, emailsType }) => {
+const useEmails = (body) => {
   const {
     userInfo: { email },
   } = useStore();
-  return usePost("/mail/recive", { email, pageNum, emailsType });
+
+  return usePostData("/mail/recive", { email, ...body }, [body]);
 };
 
 export default useEmails;

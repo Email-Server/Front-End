@@ -59,7 +59,7 @@ export default function SignUp() {
           toast.error("Something went wrong");
           return;
         }
-        setUserInfo(response);
+        setUserInfo(response.data);
         setLogin(true);
         navigate("/");
         toast.success("Account created successfully");

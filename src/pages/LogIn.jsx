@@ -54,10 +54,9 @@ export default function LogIn() {
         setLoading(false);
         if (response.error) {
           toast.error("Something went wrong");
-
           return;
         }
-        setUserInfo(response);
+        setUserInfo(response.data);
         setLogin(true);
         navigate("/");
         toast.success("Welcome! You are now logged in.");
@@ -147,7 +146,7 @@ export default function LogIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-      {/* {loading && <Loading />} */}
+      {loading && <Loading />}
     </ThemeProvider>
   );
 }

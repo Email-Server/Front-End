@@ -1,5 +1,4 @@
 import { Checkbox, IconButton } from "@mui/material";
-import { useEffect, useState } from "react";
 import "./EmailList.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -16,7 +15,8 @@ import EmailRow from "../EmailRow/EmailRow";
 import { Skeleton } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 function EmailList() {
-  const [data, loading] = useOutletContext();
+  const [{ count, receiver }, loading, error] = useOutletContext();
+  console.log(error);
   return (
     <div className="emailList">
       <div className="emailList-settings">
@@ -54,30 +54,26 @@ function EmailList() {
       </div>
 
       <div className="emailList-list">
-        {data.map(({ id, data: { to, subject, message, timestamp } }) => (
-          <EmailRow
-            id={id}
-            key={id}
-            title={to}
-            subject={subject}
-            description={message}
-            time={new Date(timestamp?.seconds * 1000).toUTCString()}
-          />
-        ))}
-        <EmailRow
-          title="Twitch"
-          subject="Hey fellow streamer!!"
-          description="This is a DOPE"
-          time="10pm"
-        />
-        {loading && (
+        {loading ? (
           <>
             <Skeleton animation="wave" height={20} width={"100%"} />
             <Skeleton animation="wave" height={20} width={"90%"} />
             <Skeleton animation="wave" height={20} width={"80%"} />
-            <Skeleton animation="wave" height={20} width={"60%"} />
-            <Skeleton animation="wave" height={20} width={"900%"} />
           </>
+        ) : error ? (
+          <div className="w-full mx-auto mt-10 text-center">
+            <h1>No Emails</h1>
+          </div>
+        ) : (
+          receiver?.map(({ _id, subject, body, timestamp }) => (
+            <EmailRow
+              id={_id}
+              key={_id}
+              subject={subject}
+              description={body}
+              time={new Date(timestamp?.seconds * 1000).toUTCString()}
+            />
+          ))
         )}
       </div>
     </div>

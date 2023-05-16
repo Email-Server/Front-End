@@ -5,7 +5,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import LabelImportantOutlinedIcon from "@mui/icons-material/LabelImportantOutlined";
 import { useNavigate } from "react-router-dom";
 
-function EmailRow({ id, title, subject, description, time }) {
+function EmailRow({ id, subject, description, time }) {
   const navigate = useNavigate();
 
   const openMail = () => {
@@ -23,7 +23,7 @@ function EmailRow({ id, title, subject, description, time }) {
           <LabelImportantOutlinedIcon />
         </IconButton>
       </div>
-      <h3 className="emailRow-title">{title}</h3>
+
       <div className="emailRow-message">
         <h4>
           {subject}{" "}

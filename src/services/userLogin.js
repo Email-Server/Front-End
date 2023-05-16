@@ -1,7 +1,7 @@
-import postData from "./postUserData";
+import postRequest from "./postRequest";
 
-const useLogin = (body) => {
-  return postData("/auth/login", body);
+const userLogin = (body) => {
+  return postRequest("/auth/login", body);
 };
 
-export default useLogin;
+export default userLogin;

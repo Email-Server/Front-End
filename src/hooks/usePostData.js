@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
-const usePost = (endPoint, body) => {
+const usePostData = (endPoint, body, depend) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -12,6 +12,7 @@ const usePost = (endPoint, body) => {
       .post(endPoint, body, { signal: controller.signal })
       .then((res) => {
         setLoading(false);
+        setError("");
         setData(res.data);
       })
       .catch((err) => {
@@ -20,9 +21,9 @@ const usePost = (endPoint, body) => {
       });
 
     return () => controller.abort();
-  }, [body, endPoint]);
+  }, [...depend]);
 
   return { data, loading, error };
 };
 
-export default usePost;
+export default usePostData;

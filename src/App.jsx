@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import Header from "./components/Header/Header";
 import SendMail from "./components/SendMail/SendMail";
@@ -8,10 +8,17 @@ import useComposeModal from "./hooks/useComposeModa";
 import useEmails from "./hooks/useEmails";
 
 function App() {
-  const [emailsType, setEmailsType] = useState("all");
+  const [emailsType, setEmailsType] = useState({});
   const [pageNum, setPageNum] = useState(1);
-  const { data, loading, error } = useEmails({ pageNum, emailsType });
 
+  const body = useMemo(() => {
+    return {
+      number: pageNum,
+      ...emailsType,
+    };
+  }, [pageNum, emailsType]);
+
+  const { data, loading, error } = useEmails(body);
   const { isOpen } = useComposeModal();
   return (
     <div className="h-screen">
@@ -22,7 +29,7 @@ function App() {
           emailsType={emailsType}
           setEmailsType={(value) => setEmailsType(value)}
         />
-        <Outlet context={[data, loading, setPageNum]} />
+        <Outlet context={[data, loading, error, setPageNum]} />
       </div>
       {isOpen && <SendMail />}
     </div>

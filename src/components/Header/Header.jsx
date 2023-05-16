@@ -8,11 +8,13 @@ import AppsIcon from "@mui/icons-material/Apps";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import useStore from "../../hooks/useStore";
-
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const navigate = useNavigate();
   const { setLogin } = useStore();
   const signOut = () => {
     setLogin(false);
+    navigate("/login");
   };
 
   return (

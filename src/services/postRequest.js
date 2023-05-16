@@ -1,8 +1,9 @@
 import apiClient from "./api-client";
-const postData = (endPoint, body) => {
+const postRequest = (endPoint, body) => {
   const controller = new AbortController();
   const res = apiClient.post(endPoint, body, { signal: controller.signal });
+  console.log(res);
   return res;
 };
 
-export default postData;
+export default postRequest;

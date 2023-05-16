@@ -1,22 +1,46 @@
-import React from "react";
+import { useState } from "react";
 import "./SendMail.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import useComposeModal from "../../hooks/useComposeModa";
+import useStore from "../../hooks/useStore";
+import userSendEmail from "../../services/userSendEmail";
+import Loading from "./../Loading/Loading";
+import { toast } from "react-hot-toast";
 
 function SendMail() {
   const composeModal = useComposeModal();
+  const { userInfo } = useStore();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    console.log(userInfo);
+    const data = {
+      userID: userInfo.id,
+      from: userInfo.email,
+      to: formData.to,
+      subject: formData.subject,
+      body: formData.message,
+    };
+
+    setLoading(true);
+    userSendEmail(data)
+      .then((res) => {
+        setLoading(false);
+        toast.success("Email Sent Successfully");
+        composeModal.toggle();
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error("Error Email Not Sent");
+      });
   };
 
   return (
@@ -60,10 +84,11 @@ function SendMail() {
             color="primary"
             className="sendMail-send"
           >
-            Send
+            {loading ? "Sending..." : "Send"}
           </Button>
         </div>
       </form>
+      {loading && <Loading />}
     </div>
   );
 }

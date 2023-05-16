@@ -1,7 +1,7 @@
-import postUserData from "./postUserData";
+import postRequest from "./postRequest";
 
 const useSignUp = (body) => {
-  return postUserData("/auth/register", body);
+  return postRequest("/auth/register", body);
 };
 
 export default useSignUp;

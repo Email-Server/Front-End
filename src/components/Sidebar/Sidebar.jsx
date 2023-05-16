@@ -1,5 +1,5 @@
 import { Button, IconButton } from "@mui/material";
-import React from "react";
+
 import "./Sidebar.css";
 import AddIcon from "@mui/icons-material/Add";
 import InboxIcon from "@mui/icons-material/Inbox";
@@ -14,10 +14,10 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import SidebarOption from "./SidebarOption";
 import { Link } from "react-router-dom";
 import useComposeModal from "../../hooks/useComposeModa";
-
+import { useNavigate } from "react-router-dom";
 function Sidebar({ emails, emailsType, setEmailsType }) {
   const composeModal = useComposeModal();
-
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <Button
@@ -27,53 +27,67 @@ function Sidebar({ emails, emailsType, setEmailsType }) {
       >
         Compose
       </Button>
-      <Link to="/" className="sidebar-link">
-        <SidebarOption
-          Icon={InboxIcon}
-          title="Inbox"
-          number={emails.length}
-          selected={true}
-        />
-      </Link>
+
+      <SidebarOption
+        Icon={InboxIcon}
+        title="Inbox"
+        number={emails.length}
+        selected={Object.keys(emailsType).length === 0}
+        onClick={() => {
+          setEmailsType({});
+          navigate("/");
+        }}
+      />
 
       <SidebarOption
         Icon={StarIcon}
         title="Starred"
-        number={12}
+        number={emails.length}
+        selected={emailsType.isStarred === true}
         onClick={() => {
-          setEmailsType("starred");
+          setEmailsType({ isStarred: true });
+          navigate("/");
         }}
       />
+
       <SidebarOption
         Icon={AccessTimeIcon}
         title="Snoozed"
-        number={9}
+        number={emails.length}
+        selected={emailsType.isSnoozed === true}
         onClick={() => {
-          setEmailsType("snoozed");
+          setEmailsType({ isSnoozed: true });
+          navigate("/");
         }}
       />
       <SidebarOption
         Icon={LabelImportantIcon}
         title="Important"
-        number={12}
+        number={emails.length}
+        selected={emailsType.isImportant === true}
         onClick={() => {
-          setEmailsType("important");
+          setEmailsType({ isImportant: true });
+          navigate("/");
         }}
       />
       <SidebarOption
         Icon={NearMeIcon}
         title="Sent"
-        number={81}
+        number={emails.length}
+        selected={emailsType.isSend === true}
         onClick={() => {
-          setEmailsType("send");
+          setEmailsType({ isSend: true });
+          navigate("/");
         }}
       />
       <SidebarOption
         Icon={NoteIcon}
         title="Drafts"
-        number={5}
+        number={emails.length}
+        selected={emailsType.isDraft === true}
         onClick={() => {
-          setEmailsType("drafts");
+          setEmailsType({ isDraft: true });
+          navigate("/");
         }}
       />
 

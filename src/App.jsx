@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Header from "./components/Header/Header";
 import SendMail from "./components/SendMail/SendMail";
@@ -8,8 +8,12 @@ import useComposeModal from "./hooks/useComposeModa";
 import useEmails from "./hooks/useEmails";
 
 function App() {
+  const { isOpen } = useComposeModal();
   const [emailsType, setEmailsType] = useState({});
   const [pageNum, setPageNum] = useState(1);
+  const [emails, setEmails] = useState([]);
+  const [filteredEmails, setFilteredEmails] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const body = useMemo(() => {
     return {
@@ -19,17 +23,44 @@ function App() {
   }, [pageNum, emailsType]);
 
   const { data, loading, error } = useEmails(body);
-  const { isOpen } = useComposeModal();
+
+  useEffect(() => {
+    if (data?.receiver) {
+      setEmails(data?.receiver);
+    }
+  }, [data]);
+
+  const handleEmailSearch = (searchTerm) => {
+    const filtered = emails.filter(
+      (item) =>
+        item.subject.toLowerCase().includes(searchTerm) ||
+        item.body.toLowerCase().includes(searchTerm)
+    );
+    setFilteredEmails(filtered);
+  };
   return (
     <div className="h-screen">
-      <Header />
+      <Header
+        handleEmailSearch={handleEmailSearch}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <div className="flex h-screen">
         <Sidebar
-          emails={data}
+          emails={emails}
           emailsType={emailsType}
           setEmailsType={(value) => setEmailsType(value)}
         />
-        <Outlet context={[data, loading, error, setPageNum]} />
+        <Outlet
+          context={[
+            emails,
+            filteredEmails,
+            searchTerm,
+            loading,
+            error,
+            setPageNum,
+          ]}
+        />
       </div>
       {isOpen && <SendMail />}
     </div>

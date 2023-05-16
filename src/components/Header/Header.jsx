@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Avatar, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -9,14 +10,20 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import useStore from "../../hooks/useStore";
 import { useNavigate } from "react-router-dom";
-function Header() {
+function Header({ handleEmailSearch, setSearchTerm, searchTerm }) {
   const navigate = useNavigate();
   const { setLogin } = useStore();
+
   const signOut = () => {
     setLogin(false);
     navigate("/login");
   };
 
+  const searchHandler = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    handleEmailSearch(value, searchTerm);
+  };
   return (
     <div className="header">
       <div className="header-left">
@@ -30,7 +37,12 @@ function Header() {
       </div>
       <div className="header-middle">
         <SearchIcon />
-        <input type="text" placeholder="Search mail" />
+        <input
+          type="text"
+          placeholder="Search mail"
+          value={searchTerm}
+          onChange={searchHandler}
+        />
         <ArrowDropDownIcon className="header-inputCaret" />
       </div>
       <div className="header-right">
@@ -43,7 +55,10 @@ function Header() {
         <IconButton>
           <AppsIcon />
         </IconButton>
-        <Avatar onClick={signOut} src={"photoUrl"} />
+        <Avatar src={"photoUrl"} />
+        <IconButton onClick={signOut}>
+          <LogoutIcon />
+        </IconButton>
       </div>
     </div>
   );

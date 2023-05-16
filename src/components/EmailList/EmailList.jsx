@@ -15,8 +15,9 @@ import EmailRow from "../EmailRow/EmailRow";
 import { Skeleton } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 function EmailList() {
-  const [{ count, receiver }, loading, error] = useOutletContext();
-  console.log(error);
+  const [emails, filteredEmails, searchTerm, loading, error] =
+    useOutletContext();
+
   return (
     <div className="emailList">
       <div className="emailList-settings">
@@ -60,20 +61,58 @@ function EmailList() {
             <Skeleton animation="wave" height={20} width={"90%"} />
             <Skeleton animation="wave" height={20} width={"80%"} />
           </>
-        ) : error ? (
+        ) : error ||
+          (filteredEmails?.length === 0 && searchTerm) ||
+          emails?.length === 0 ? (
           <div className="w-full mx-auto mt-10 text-center">
             <h1>No Emails</h1>
           </div>
+        ) : searchTerm ? (
+          filteredEmails?.map(
+            ({
+              _id,
+              isStarred,
+              isImportant,
+              isRead,
+              subject,
+              body,
+              timestamp,
+            }) => (
+              <EmailRow
+                id={_id}
+                key={_id}
+                isStarred={isStarred}
+                isImportant={isImportant}
+                isRead={isRead}
+                subject={subject}
+                description={body}
+                time={timestamp}
+              />
+            )
+          )
         ) : (
-          receiver?.map(({ _id, subject, body, timestamp }) => (
-            <EmailRow
-              id={_id}
-              key={_id}
-              subject={subject}
-              description={body}
-              time={new Date(timestamp?.seconds * 1000).toUTCString()}
-            />
-          ))
+          emails?.map(
+            ({
+              _id,
+              isStarred,
+              isImportant,
+              isRead,
+              subject,
+              body,
+              timestamp,
+            }) => (
+              <EmailRow
+                id={_id}
+                key={_id}
+                isStarred={isStarred}
+                isImportant={isImportant}
+                isRead={isRead}
+                subject={subject}
+                description={body}
+                time={timestamp}
+              />
+            )
+          )
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Mail.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
@@ -14,9 +14,14 @@ import PrintIcon from "@mui/icons-material/Print";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Mail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [emails] = useOutletContext();
+  const { subject, body, timestamp } = emails.find((email) => email._id === id);
 
   return (
     <div className="mail">
@@ -75,15 +80,15 @@ function Mail() {
       <div className="mail-body">
         <div className="mail-bodyHeader">
           <div className="mail-subject">
-            <h2>"subject"</h2>
+            <h2>{subject}</h2>
             <LabelImportantIcon className="mail-important" />
           </div>
-          <p>title</p>
-          <p className="mail-time">time</p>
+
+          <p className="mail-time">{timestamp}</p>
         </div>
 
         <div className="mail-message">
-          <p>description</p>
+          <p>{body}</p>
         </div>
       </div>
     </div>

@@ -19,9 +19,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <LoginReq>
-      <App />
-      // </LoginReq>
+      <LoginReq>
+        <App />
+      </LoginReq>
     ),
     children: [
       { index: true, element: <EmailList /> },

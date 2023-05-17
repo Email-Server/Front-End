@@ -1,11 +1,3 @@
-:root {
-  --hue: 223;
-  --bg: hsl(var(--hue), 90%, 90%);
-  --fg: hsl(var(--hue), 90%, 10%);
-  --primary: hsl(var(--hue), 90%, 50%);
-  --trans-dur: 0.3s;
-}
-
 .loading {
   position: fixed;
   offset: 0;
@@ -14,179 +6,51 @@
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: var(--fg);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   font: 1em/1.5 sans-serif;
-  /* height: 100vh; */
+  justify-content: center;
+  align-items: center;
   transition: background-color var(--trans-dur), color var(--trans-dur);
 }
-.bike {
-  display: block;
-  margin: auto;
-  width: 16em;
-  height: auto;
-}
-.bike__body,
-.bike__front,
-.bike__handlebars,
-.bike__pedals,
-.bike__pedals-spin,
-.bike__seat,
-.bike__spokes,
-.bike__spokes-spin,
-.bike__tire {
-  animation: bikeBody 3s ease-in-out infinite;
-  stroke: var(--primary);
-  transition: stroke var(--trans-dur);
-}
-.bike__front {
-  animation-name: bikeFront;
-}
-.bike__handlebars {
-  animation-name: bikeHandlebars;
-}
-.bike__pedals {
-  animation-name: bikePedals;
-}
-.bike__pedals-spin {
-  animation-name: bikePedalsSpin;
-}
-.bike__seat {
-  animation-name: bikeSeat;
-}
-.bike__spokes,
-.bike__tire {
-  stroke: currentColor;
-}
-.bike__spokes {
-  animation-name: bikeSpokes;
-}
-.bike__spokes-spin {
-  animation-name: bikeSpokesSpin;
-}
-.bike__tire {
-  animation-name: bikeTire;
+
+.loading .shapes {
+  margin-top: -100px;
+  width: 44.8px;
+  height: 44.8px;
+  color: #474bff;
+  position: relative;
+  background: linear-gradient(currentColor 0 0) center/100% 11.2px,
+    linear-gradient(currentColor 0 0) center/11.2px 100%;
+  background-repeat: no-repeat;
 }
 
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: hsl(var(--hue), 90%, 10%);
-    --fg: hsl(var(--hue), 90%, 90%);
-  }
+.loading .shapes:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(currentColor 0 0) 0 0,
+    linear-gradient(currentColor 0 0) 100% 0,
+    linear-gradient(currentColor 0 0) 0 100%,
+    linear-gradient(currentColor 0 0) 100% 100%;
+  background-size: 16.799999999999997px 16.799999999999997px;
+  background-repeat: no-repeat;
+  animation: shapes-9a9hjfmd 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
 }
 
-/* Animations */
-@keyframes bikeBody {
-  from {
-    stroke-dashoffset: 79;
-  }
-  33%,
-  67% {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -79;
-  }
-}
-@keyframes bikeFront {
-  from {
-    stroke-dashoffset: 19;
-  }
-  33%,
-  67% {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -19;
-  }
-}
-@keyframes bikeHandlebars {
-  from {
-    stroke-dashoffset: 10;
-  }
-  33%,
-  67% {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -10;
-  }
-}
-@keyframes bikePedals {
-  from {
-    animation-timing-function: ease-in;
-    stroke-dashoffset: -25.133;
-  }
-  33%,
-  67% {
-    animation-timing-function: ease-out;
-    stroke-dashoffset: -21.991;
-  }
-  to {
-    stroke-dashoffset: -25.133;
-  }
-}
-@keyframes bikePedalsSpin {
-  from {
-    transform: rotate(0.1875turn);
-  }
-  to {
-    transform: rotate(3.1875turn);
-  }
-}
-@keyframes bikeSeat {
-  from {
-    stroke-dashoffset: 5;
-  }
-  33%,
-  67% {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -5;
-  }
-}
-@keyframes bikeSpokes {
-  from {
-    animation-timing-function: ease-in;
-    stroke-dashoffset: -31.416;
-  }
-  33%,
-  67% {
-    animation-timing-function: ease-out;
-    stroke-dashoffset: -23.562;
-  }
-  to {
-    stroke-dashoffset: -31.416;
-  }
-}
-@keyframes bikeSpokesSpin {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(3turn);
-  }
-}
-@keyframes bikeTire {
-  from {
-    animation-timing-function: ease-in;
-    stroke-dashoffset: 56.549;
-    transform: rotate(0);
-  }
+@keyframes shapes-9a9hjfmd {
   33% {
-    stroke-dashoffset: 0;
-    transform: rotate(0.33turn);
+    inset: -11.2px;
+    transform: rotate(0deg);
   }
-  67% {
-    animation-timing-function: ease-out;
-    stroke-dashoffset: 0;
-    transform: rotate(0.67turn);
+
+  66% {
+    inset: -11.2px;
+    transform: rotate(90deg);
   }
-  to {
-    stroke-dashoffset: -56.549;
-    transform: rotate(1turn);
+
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
   }
 }

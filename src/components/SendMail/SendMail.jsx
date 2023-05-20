@@ -44,7 +44,7 @@ function SendMail() {
   };
 
   return (
-    <div className="sendMail">
+    <div className="z-50 sendMail">
       <div className="sendMail-header">
         <h3>New Message</h3>
         <CloseIcon onClick={composeModal.toggle} className="sendMail-close" />

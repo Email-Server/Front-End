@@ -59,7 +59,7 @@ export default function LogIn() {
         setUserInfo(response.data);
         setLogin(true);
         navigate("/");
-        toast.success("Welcome! You are now logged in.");
+        toast.success("Welcome back");
       })
       .catch((error) => {
         setLoading(false);

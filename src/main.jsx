@@ -12,7 +12,7 @@ import LogIn from "./pages/LogIn";
 import { Toaster } from "react-hot-toast";
 import LoginReq from "./Protected-Routes/LoginReq";
 import LoginNotReq from "./Protected-Routes/LoginNotReq";
-import Calendar from "./components/Calendar/Calendar.jsx";
+import CalendarPage from "./components/CalendarPage/CalendarPage.jsx";
 import Scheduler from "./components/Scheduler/Scheduler.JSX";
 
 const router = createBrowserRouter([
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <EmailList /> },
       { path: "/mail/:id", element: <Mail /> },
-      { path: "/calendar", element: <Calendar /> },
+      { path: "/calendar", element: <CalendarPage /> },
       { path: "/scheduler", element: <Scheduler /> },
     ],
   },

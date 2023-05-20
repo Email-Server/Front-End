@@ -56,11 +56,11 @@ function EmailList() {
 
       <div className="emailList-list">
         {loading ? (
-          <>
-            <Skeleton animation="wave" height={20} width={"100%"} />
-            <Skeleton animation="wave" height={20} width={"90%"} />
-            <Skeleton animation="wave" height={20} width={"80%"} />
-          </>
+          <div className="p-4">
+            <Skeleton height={20} width={"100%"} />
+            <Skeleton height={20} width={"90%"} />
+            <Skeleton height={20} width={"80%"} />
+          </div>
         ) : error ||
           (filteredEmails?.length === 0 && searchTerm) ||
           emails?.length === 0 ? (

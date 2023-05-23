@@ -17,9 +17,9 @@ import SidebarOption from "./SidebarOption";
 function Sidebar({ emails, emailsType, setEmailsType }) {
   const composeModal = useComposeModal();
   const navigate = useNavigate();
-  console.log(emails);
+
   return (
-    <div className="sidebar">
+    <div className="pl-2 sidebar">
       <Button
         className="sidebar-compose"
         onClick={composeModal.toggle}
@@ -88,8 +88,17 @@ function Sidebar({ emails, emailsType, setEmailsType }) {
           navigate("/scheduler");
         }}
       />
+      <SidebarOption
+        Icon={PersonIcon}
+        title="Contacts"
+        selected={emailsType.isContacts === true}
+        onClick={() => {
+          setEmailsType({ isContacts: true });
+          navigate("/contacts");
+        }}
+      />
 
-      <div className="sidebar-footer">
+      {/* <div className="sidebar-footer">
         <div className="sidebar-footerIcons">
           <IconButton>
             <PersonIcon />
@@ -101,7 +110,7 @@ function Sidebar({ emails, emailsType, setEmailsType }) {
             <PhoneIcon />
           </IconButton>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

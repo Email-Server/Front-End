@@ -21,7 +21,10 @@ function Mail() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [emails] = useOutletContext();
-  const { subject, body, timestamp } = emails.find((email) => email._id === id);
+  console.log(id);
+  const { subject, title, from, body, timestamp } = emails?.find(
+    (email) => email._id === id
+  );
 
   return (
     <div className="mail">
@@ -31,7 +34,7 @@ function Mail() {
             <ArrowBackIcon />
           </IconButton>
 
-          <IconButton>
+          {/* <IconButton>
             <MoveToInboxIcon />
           </IconButton>
 
@@ -74,14 +77,15 @@ function Mail() {
 
           <IconButton>
             <ExitToAppIcon />
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
       <div className="mail-body">
         <div className="mail-bodyHeader">
           <div className="mail-subject">
-            <h2>{subject}</h2>
-            <LabelImportantIcon className="mail-important" />
+            <div className="text-lg font-bold ">{title}</div>
+            <div className="font-semibold ">From :{from}</div>
+            <div className="font-semibold ">subject: {subject}</div>
           </div>
 
           <p className="mail-time">{timestamp}</p>

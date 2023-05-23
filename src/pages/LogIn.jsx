@@ -17,6 +17,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useStore from "../hooks/useStore";
 import Loading from "../components/Loading/Loading";
+import logo from "../assets/logo.png";
 function Copyright(props) {
   return (
     <Typography
@@ -79,9 +80,10 @@ export default function LogIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#7584f2" }}>
             <LockOutlinedIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

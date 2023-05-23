@@ -14,6 +14,7 @@ import LoginReq from "./Protected-Routes/LoginReq";
 import LoginNotReq from "./Protected-Routes/LoginNotReq";
 import CalendarPage from "./components/CalendarPage/CalendarPage.jsx";
 import Scheduler from "./components/Scheduler/Scheduler.jsx";
+import Contacts from "./components/Contacts/Contacts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "/mail/:id", element: <Mail /> },
       { path: "/calendar", element: <CalendarPage /> },
       { path: "/scheduler", element: <Scheduler /> },
+      { path: "/Contacts", element: <Contacts /> },
     ],
   },
   {

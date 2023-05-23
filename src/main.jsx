@@ -13,7 +13,7 @@ import { Toaster } from "react-hot-toast";
 import LoginReq from "./Protected-Routes/LoginReq";
 import LoginNotReq from "./Protected-Routes/LoginNotReq";
 import CalendarPage from "./components/CalendarPage/CalendarPage.jsx";
-import Scheduler from "./components/Scheduler/Scheduler.JSX";
+import Scheduler from "./components/Scheduler/Scheduler.jsx";
 
 const router = createBrowserRouter([
   {

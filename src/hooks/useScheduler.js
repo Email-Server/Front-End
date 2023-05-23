@@ -1,7 +1,7 @@
 import usePostData from "./usePostData";
 
-const useScheduler = (email) => {
+const useReceiveScheduler = (email) => {
   return usePostData("/schedule/receive", { email });
 };
 
-export default useScheduler;
+export default useReceiveScheduler;

@@ -19,11 +19,11 @@ function EmailList() {
     useOutletContext();
 
   return (
-    <div className="emailList">
+    <div className="h-full emailList">
       <div className="emailList-settings">
         <div className="emailList-settingsLeft">
           <Checkbox />
-          <IconButton>
+          {/* <IconButton>
             <ArrowDropDownIcon />
           </IconButton>
           <IconButton>
@@ -31,28 +31,28 @@ function EmailList() {
           </IconButton>
           <IconButton>
             <MoreVertIcon />
-          </IconButton>
+          </IconButton> */}
         </div>
-        <div className="emailList-settingsRight">
-          <IconButton>
-            <ChevronLeftIcon />
-          </IconButton>
-          <IconButton>
-            <ChevronRightIcon />
-          </IconButton>
-          <IconButton>
-            <KeyboardHideIcon />
-          </IconButton>
-          <IconButton>
-            <SettingsIcon />
-          </IconButton>
-        </div>
+        {/* <div className="emailList-settingsRight">
+            <IconButton>
+              <ChevronLeftIcon />
+            </IconButton>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+            <IconButton>
+              <KeyboardHideIcon />
+            </IconButton>
+            <IconButton>
+              <SettingsIcon />
+            </IconButton>
+          </div> */}
       </div>
-      <div className="emailList-sections">
+      {/* <div className="emailList-sections">
         <Section Icon={InboxIcon} title="Primary" color="red" selected />
         <Section Icon={PeopleIcon} title="Social" color="#1A73E8" />
         <Section Icon={LocalOfferIcon} title="Promotions" color="green" />
-      </div>
+      </div> */}
 
       <div className="emailList-list">
         {loading ? (

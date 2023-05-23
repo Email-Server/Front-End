@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import removeCalendar from "../../services/removeCalendar";
 import { toast } from "react-hot-toast";
 import Loading from "./../Loading/Loading";
+import CloseIcon from "@mui/icons-material/Close";
 
 const EventModal = ({ data, setData, onClose, isOpened }) => {
   const [show, setShow] = useState(false);
@@ -51,10 +52,10 @@ const EventModal = ({ data, setData, onClose, isOpened }) => {
               ${show ? " opacity-100" : " opacity-0"}`}
       >
         <button
-          className="absolute px-2 py-1 font-semibold text-gray-800 rounded bg-black-300 top-2 right-2 hover:bg-gray-200"
+          className="absolute w-10 h-10 px-2 py-1 font-semibold text-gray-800 rounded-full bg-black-300 top-2 right-2 hover:bg-gray-200"
           onClick={handleClose}
         >
-          Close
+          <CloseIcon />
         </button>
         <h2 className="mb-2 text-2xl font-semibold">Meeting Details</h2>
 
@@ -97,7 +98,7 @@ const EventModal = ({ data, setData, onClose, isOpened }) => {
         </div>
 
         <button
-          className="px-4 py-2 mt-4 font-semibold text-white bg-red-500 rounded hover:bg-red-700"
+          className="w-full p-4 px-4 py-2 my-4 mt-4 text-lg font-semibold text-white bg-red-500 rounded hover:bg-red-700"
           onClick={handleDelete}
         >
           Delete

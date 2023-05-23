@@ -51,16 +51,18 @@ function App() {
           emailsType={emailsType}
           setEmailsType={(value) => setEmailsType(value)}
         />
-        <Outlet
-          context={[
-            emails,
-            filteredEmails,
-            searchTerm,
-            loading,
-            error,
-            setPageNum,
-          ]}
-        />
+        <div className="flex-1 ml-3 mr-5 p-6 mt-4  h-[90vh] bg-white rounded-lg shadow-md ">
+          <Outlet
+            context={[
+              emails,
+              filteredEmails,
+              searchTerm,
+              loading,
+              error,
+              setPageNum,
+            ]}
+          />
+        </div>
       </div>
       {isOpen && <SendMail />}
     </div>

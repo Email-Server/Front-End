@@ -26,11 +26,11 @@ const CalendarPage = () => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
   ];
-
+  console.log(loading);
   return (
     <>
       {loading ? (
-        <div className="grid w-full grid-cols-6 gap-4 p-6 h-fit ">
+        <div className="grid w-full grid-cols-6 gap-4 p-6 h-fit flex-[1] ">
           {skeletonArray.map((item) => (
             <Skeleton variant="rectangular" height={120} key={item} />
           ))}

@@ -4,7 +4,7 @@ const usePostData = (endPoint, body, depend) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  console.log(body);
+
   useEffect(
     () => {
       const controller = new AbortController();
@@ -21,7 +21,7 @@ const usePostData = (endPoint, body, depend) => {
           setError(err.message);
         });
 
-      return () => controller.abort();
+      // return () => controller.abort();
     },
     depend ? [...depend] : []
   );

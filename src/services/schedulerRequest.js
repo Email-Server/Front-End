@@ -1,7 +1,7 @@
 import postRequest from "./postRequest";
 
-const schedulerRequest = (body) => {
+const schedulerSendRequest = (body) => {
   return postRequest("/schedule/send", body);
 };
 
-export default schedulerRequest;
+export default schedulerSendRequest;

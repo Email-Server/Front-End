@@ -44,12 +44,14 @@ export default function LogIn() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const data = new FormData(event.currentTarget);
     const realData = {
       email: data.get("email"),
       password: data.get("password"),
     };
+    if (!realData.email || !realData.password) return;
+    setLoading(true);
+
     userLogin(realData)
       .then((response) => {
         setLoading(false);

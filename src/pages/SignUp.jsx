@@ -44,7 +44,6 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const data = new FormData(event.currentTarget);
     const realData = {
       firstName: data.get("firstName"),
@@ -52,6 +51,15 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     };
+    if (
+      !realData.email ||
+      !realData.password ||
+      !realData.firstName ||
+      !realData.lastName
+    )
+      return;
+
+    setLoading(true);
     userSignUp(realData)
       .then((response) => {
         setLoading(false);

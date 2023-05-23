@@ -9,7 +9,8 @@ import useStore from "../../hooks/useStore";
 import userSendEmail from "../../services/userSendEmail";
 import Loading from "./../Loading/Loading";
 import { toast } from "react-hot-toast";
-import SendIcon from "@mui/icons-material/Send";import moment from "moment";
+import SendIcon from "@mui/icons-material/Send";
+import moment from "moment";
 import schedulerSendRequest from "../../services/schedulerRequest";
 
 function SendMail() {
@@ -67,14 +68,6 @@ function SendMail() {
     setScheduleLocation("");
   };
 
-  // const handleDateChange = (date) => {
-  //   setScheduleDate(date);
-  // };
-
-  // const handleTimeChange = (time) => {
-  //   setScheduleTime(time);
-  // };
-
   const scheduleMail = () => {
     if (!scheduleDate || !scheduleStartTime || !scheduleEndTime) {
       toast.error("Please select a valid date and time.");
@@ -95,6 +88,7 @@ function SendMail() {
 
     // Perform the scheduling request here
     const schedulerRequestHandler = () => {
+      setLoading(true);
       const data = {
         organizerEmail: userInfo.email,
         attendeeEmail: toMail.trim(),
@@ -106,11 +100,12 @@ function SendMail() {
       };
       schedulerSendRequest(data)
         .then((res) => {
-          console.log(res);
+          setLoading(false);
           toast.success("Scheduler request sent successfully");
+          composeModal.toggle();
         })
         .catch((err) => {
-          console.log(err);
+          setLoading(false);
           toast.error("Scheduler request failed");
         });
     };
@@ -135,14 +130,11 @@ function SendMail() {
             placeholder="To"
             type="email"
             value={emailTo}
-            
-}
             onChange={(e) => {
-            setToMail(e.target.value);
-            setEmailTo(e.target.value)
-
-          }}
-        />
+              setToMail(e.target.value);
+              setEmailTo(e.target.value);
+            }}
+          />
           <input
             name="subject"
             placeholder="Subject"
@@ -175,106 +167,110 @@ function SendMail() {
               )}
             </Button>
             <Button onClick={openModal} className="sendMail-send-schedule">
-            Send Schedule
-          </Button>
-        </div>
-          <Modal
-          open={isModalOpen}
-          onClose={closeModal}
-          sx={{ position: "absolute", top: "30%", left: "30%" }}
-        >
-          <div
-            className="modal-container"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: 400,
-              height: 400,
-              backgroundColor: "#fff",
-              padding: 5,
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 5,
-            }}
-          >
-            <div>
-              <label style={{ marginRight: 10 }}>Title</label>
-              <input
-                type="text"
-                value={scheduleTitle}
-                onChange={(e) => {
-                  setScheduleTitle(e.target.value);
-                }}
-                label="Select Date"
-                style={styles.input}
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: 10 }}>Date</label>
-              <input
-                type="date"
-                value={scheduleDate}
-                onChange={(e) => {
-                  setScheduleDate(e.target.value);
-                }}
-                label="Select Date"
-                style={styles.input}
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: 10 }}>Start Time</label>
-              <input
-                type="time"
-                value={scheduleStartTime}
-                onChange={(e) => {
-                  setScheduleStartTime(e.target.value);
-                }}
-                label="Select Time"
-                style={styles.input}
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: 10 }}>End Time</label>
-              <input
-                type="time"
-                value={scheduleEndTime}
-                onChange={(e) => {
-                  setScheduleEndTime(e.target.value);
-                }}
-                label="Select Time"
-                style={styles.input}
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: 10 }}>Description</label>
-              <input
-                type="text"
-                value={scheduleDescription}
-                onChange={(e) => {
-                  setScheduleDescription(e.target.value);
-                }}
-                label="Select Date"
-                style={styles.input}
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: 10 }}>Location</label>
-              <input
-                type="text"
-                value={scheduleLocation}
-                onChange={(e) => {
-                  setScheduleLocation(e.target.value);
-                }}
-                label="Select Date"
-                style={styles.input}
-              />
-            </div>
-            <Button onClick={scheduleMail} color="primary">
-              Schedule
+              Send Schedule
             </Button>
           </div>
-        </Modal>
-      </form>
+          <Modal
+            open={isModalOpen}
+            onClose={closeModal}
+            sx={{ position: "absolute", top: "20%", left: "38%" }}
+          >
+            <div
+              className="modal-container"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: 400,
+                height: 400,
+                backgroundColor: "#fff",
+                padding: 5,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 5,
+              }}
+            >
+              <div>
+                <label style={{ marginRight: 10 }}>Title</label>
+                <input
+                  type="text"
+                  value={scheduleTitle}
+                  onChange={(e) => {
+                    setScheduleTitle(e.target.value);
+                  }}
+                  label="Select Date"
+                  style={styles.input}
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: 10 }}>Date</label>
+                <input
+                  type="date"
+                  value={scheduleDate}
+                  onChange={(e) => {
+                    setScheduleDate(e.target.value);
+                  }}
+                  label="Select Date"
+                  style={styles.input}
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: 10 }}>Start Time</label>
+                <input
+                  type="time"
+                  value={scheduleStartTime}
+                  onChange={(e) => {
+                    setScheduleStartTime(e.target.value);
+                  }}
+                  label="Select Time"
+                  style={styles.input}
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: 10 }}>End Time</label>
+                <input
+                  type="time"
+                  value={scheduleEndTime}
+                  onChange={(e) => {
+                    setScheduleEndTime(e.target.value);
+                  }}
+                  label="Select Time"
+                  style={styles.input}
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: 10 }}>Description</label>
+                <input
+                  type="text"
+                  value={scheduleDescription}
+                  onChange={(e) => {
+                    setScheduleDescription(e.target.value);
+                  }}
+                  label="Select Date"
+                  style={styles.input}
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: 10 }}>Location</label>
+                <input
+                  type="text"
+                  value={scheduleLocation}
+                  onChange={(e) => {
+                    setScheduleLocation(e.target.value);
+                  }}
+                  label="Select Date"
+                  style={styles.input}
+                />
+              </div>
+              <Button
+                onClick={scheduleMail}
+                color="primary"
+                variant="contained"
+              >
+                Schedule
+              </Button>
+            </div>
+          </Modal>
+        </form>
         {loading && <Loading />}
       </div>
     </div>

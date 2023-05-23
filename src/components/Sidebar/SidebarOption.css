@@ -15,8 +15,8 @@
 .sidebarOption--active,
 .sidebarOption--active > p,
 .sidebarOption--active > h3 {
-  background-color: #eaf1fb;
-  color: #c04b37;
+  background-color: #d3e3fd;
+  color: #0b51c1;
   font-weight: 800 !important;
 }
 

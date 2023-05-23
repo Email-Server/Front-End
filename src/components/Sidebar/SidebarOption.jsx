@@ -9,7 +9,7 @@ function SidebarOption({ Icon, title, number, selected, onClick }) {
     >
       <Icon />
       <h3>{title}</h3>
-      <p>{number}</p>
+      {/* <p>{number}</p>x   */}
     </div>
   );
 }

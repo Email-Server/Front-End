@@ -26,7 +26,7 @@ const Scheduler = () => {
   // fetch current Scheduler data
   const { data, loading, error } = useReceiveScheduler(email);
   console.log(data);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [rerender, setRerender] = useState(false);
 
   const [showSent, setShowSent] = useState(true);
@@ -64,7 +64,7 @@ const Scheduler = () => {
           }}
         >
           <label style={styles.title}>{schedule.title}</label>
-          <label className="truncate text-lg ml-40">
+          <label className="ml-40 text-lg truncate">
             {schedule.description}
           </label>
           {schedule.received === true && (
@@ -143,10 +143,10 @@ const Scheduler = () => {
                   placeholder={title}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="text-2xl font-bold mb-10 text-center border-2 border-slate-700"
+                  className="mb-10 text-2xl font-bold text-center border-2 border-slate-700"
                 />
               ) : (
-                <p className="text-4xl font-semibold mb-5 text-slate-800">
+                <p className="mb-5 text-4xl font-semibold text-slate-800">
                   {title}
                 </p>
               )}
@@ -156,18 +156,18 @@ const Scheduler = () => {
                   placeholder={description}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="text-xl font-semibold mb-5 text-slate-800 text-center border-2 border-slate-700"
+                  className="mb-5 text-xl font-semibold text-center border-2 text-slate-800 border-slate-700"
                 />
               ) : (
-                <p className="text-xl font-semibold mb-5 text-slate-800">
+                <p className="mb-5 text-xl font-semibold text-slate-800">
                   {description}
                 </p>
               )}
 
               {showSent ? (
-                <p className="text-lg mb-5">Attendee: {attendee}</p>
+                <p className="mb-5 text-lg">Attendee: {attendee}</p>
               ) : (
-                <p className="text-lg mb-5">organizer: {organizer}</p>
+                <p className="mb-5 text-lg">organizer: {organizer}</p>
               )}
 
               {showSent ? (
@@ -199,7 +199,7 @@ const Scheduler = () => {
                   />
                 </>
               ) : (
-                <p className="text-lg mb-3">Start at: {start}</p>
+                <p className="mb-3 text-lg">Start at: {start}</p>
               )}
 
               {showSent ? (
@@ -230,30 +230,37 @@ const Scheduler = () => {
                   />
                 </>
               ) : (
-                <p className="text-lg mb-3">Start at: {end}</p>
+                <p className="mb-3 text-lg">Start at: {end}</p>
               )}
 
               {showSent ? (
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <div
                     style={styles.iconContainer}
-                    className="bg-slate-200 flex rounded-lg hover:cursor-pointer hover:bg-slate-300"
+                    className="flex rounded-lg bg-slate-200 hover:cursor-pointer hover:bg-slate-300"
                     onClick={() => {
+                      setIsLoading(true);
                       scheduleRemove({ schedulerId })
                         .then((res) => {
+                          setIsLoading(false);
                           toast.success("Schedule deleted Successfully");
                           setOpenModal(false);
                         })
                         .catch((err) => {
+                          setIsLoading(false);
                           toast.error("Error Schedule Not deleted");
                         });
                     }}
                   >
-                    <DeleteIcon size="large" color="error" />
+                    {isLoading ? (
+                      <div className="mx-auto mt-3 ">Loading</div>
+                    ) : (
+                      <DeleteIcon size="large" color="error" />
+                    )}
                   </div>
                   <div
                     style={styles.iconContainer}
-                    className="bg-slate-200 flex rounded-lg hover:cursor-pointer hover:bg-slate-300"
+                    className="flex rounded-lg bg-slate-200 hover:cursor-pointer hover:bg-slate-300"
                     onClick={() => {
                       scheduleEdit({
                         id: schedulerId,
@@ -285,7 +292,7 @@ const Scheduler = () => {
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <div
                     style={styles.iconContainer}
-                    className="bg-slate-200 flex rounded-lg hover:cursor-pointer hover:bg-slate-300 "
+                    className="flex rounded-lg bg-slate-200 hover:cursor-pointer hover:bg-slate-300 "
                     onClick={() => {
                       scheduleApprove({ schedulerId })
                         .then((res) => {
@@ -302,7 +309,7 @@ const Scheduler = () => {
 
                   <div
                     style={styles.iconContainer}
-                    className="bg-slate-200 flex rounded-lg hover:cursor-pointer hover:bg-slate-300 "
+                    className="flex rounded-lg bg-slate-200 hover:cursor-pointer hover:bg-slate-300 "
                     onClick={() => {
                       scheduleIgnore({ schedulerId })
                         .then((res) => {

@@ -71,15 +71,6 @@ function Sidebar({ emails, emailsType, setEmailsType }) {
         }}
       />
       <SidebarOption
-        Icon={CalendarMonthIcon}
-        title="calendar"
-        selected={emailsType.isCalender === true}
-        onClick={() => {
-          setEmailsType({ isCalender: true });
-          navigate("/calendar");
-        }}
-      />
-      <SidebarOption
         Icon={GroupsIcon}
         title="Scheduler"
         selected={emailsType.isScheduler === true}
@@ -88,6 +79,16 @@ function Sidebar({ emails, emailsType, setEmailsType }) {
           navigate("/scheduler");
         }}
       />
+      <SidebarOption
+        Icon={CalendarMonthIcon}
+        title="calendar"
+        selected={emailsType.isCalender === true}
+        onClick={() => {
+          setEmailsType({ isCalender: true });
+          navigate("/calendar");
+        }}
+      />
+
       <SidebarOption
         Icon={PersonIcon}
         title="Contacts"

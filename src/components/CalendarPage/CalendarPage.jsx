@@ -17,6 +17,7 @@ const CalendarPage = () => {
   const [isOpened, setIsOpened] = useState(false);
 
   const localizer = momentLocalizer(moment);
+  console.log(data);
 
   const handleSelectedEvent = (event) => {
     setEventDetails(event);

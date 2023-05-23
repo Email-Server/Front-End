@@ -7,7 +7,7 @@ const useEmails = (body) => {
   const {
     userInfo: { email },
   } = useStore();
-
+  // console.log(body);
   return usePostData("/mail/recive", { email, isSend: false, ...body }, [
     body,
     location,

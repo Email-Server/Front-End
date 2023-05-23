@@ -22,7 +22,7 @@ function EmailList() {
     <div className="h-full emailList">
       <div className="emailList-settings">
         <div className="emailList-settingsLeft">
-          <Checkbox />
+          {/* <Checkbox /> */}
           {/* <IconButton>
             <ArrowDropDownIcon />
           </IconButton>
@@ -87,6 +87,7 @@ function EmailList() {
                 subject={subject}
                 description={body}
                 time={timestamp}
+                emails={emails}
               />
             )
           )

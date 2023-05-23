@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Mail.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
@@ -21,10 +21,20 @@ function Mail() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [emails] = useOutletContext();
+  const [email, setEmail] = useState({});
+
+  useEffect(() => {
+    // const {
+    //   subject = "",
+    //   title,
+    //   from,
+    //   body,
+    //   timestamp,
+    // } = emails?.find((email) => email._id === id);
+    setEmail(emails?.find((email) => email._id === id));
+  }, []);
+
   console.log(id);
-  const { subject, title, from, body, timestamp } = emails?.find(
-    (email) => email._id === id
-  );
 
   return (
     <div className="mail">
@@ -83,16 +93,16 @@ function Mail() {
       <div className="mail-body">
         <div className="mail-bodyHeader">
           <div className="mail-subject">
-            <div className="text-lg font-bold ">{title}</div>
-            <div className="font-semibold ">From :{from}</div>
-            <div className="font-semibold ">subject: {subject}</div>
+            <div className="text-lg font-bold ">{email?.title}</div>
+            <div className="font-semibold ">From :{email?.from}</div>
+            <div className="font-semibold ">subject: {email?.subject}</div>
           </div>
 
-          <p className="mail-time">{timestamp}</p>
+          <p className="mail-time">{email?.timestamp}</p>
         </div>
 
         <div className="mail-message">
-          <p>{body}</p>
+          <p>{email?.body}</p>
         </div>
       </div>
     </div>

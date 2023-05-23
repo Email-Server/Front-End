@@ -1,5 +1,5 @@
 import { Checkbox, IconButton } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./EmailRow.css";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import StarIcon from "@mui/icons-material/Star";
@@ -57,7 +57,7 @@ function EmailRow({
   return (
     <div className="emailRow">
       <div className="emailRow-options">
-        <Checkbox />
+        {/* <Checkbox /> */}
         <IconButton onClick={starControl}>
           {started ? (
             <StarIcon htmlColor="#f7cb69" />
@@ -71,7 +71,7 @@ function EmailRow({
       </div>
 
       <div className="h-full emailRow-message" onClick={openMail}>
-        <h4 className={!Read && "font-bold"}>
+        <h4 className={!Read && "font-bold text-lg"}>
           {subject}{" "}
           <span className="emailRow-description"> - {description}</span>
         </h4>

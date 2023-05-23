@@ -33,8 +33,8 @@ function App() {
   const handleEmailSearch = (searchTerm) => {
     const filtered = emails.filter(
       (item) =>
-        item.subject.toLowerCase().includes(searchTerm) ||
-        item.body.toLowerCase().includes(searchTerm)
+        item.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.body.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredEmails(filtered);
   };
